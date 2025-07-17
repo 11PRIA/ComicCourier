@@ -69,6 +69,7 @@ src/
 git clone https://github.com/11PRIA/ComicCourier.git
 cd ComicCourier
 git checkout -b priyanka-submission
+```
 2. Set Up Email
 Configure php.ini and sendmail.ini in XAMPP to use Gmail SMTP
 
@@ -103,9 +104,6 @@ Subject: Your Verification Code
 📬 Comic Email
 Subject: Your XKCD Comic
 
-html
-Copy
-Edit
 <h2>XKCD Comic</h2>
 <img src="comic_image_url" alt="XKCD Comic">
 <p><a href="http://localhost/xkcd-mailer/xkcd-11PRIA/src/unsubscribe.php">Unsubscribe</a></p>
@@ -115,7 +113,7 @@ Subject: Confirm Un-subscription
 <p>To confirm un-subscription, use this code: <strong>654321</strong></p>
 
 
-👩‍💻 Author
+## 👩‍💻 Author
 Priyanka Kumari
 📧 Email: priyanka11062003@gmail.com
 🌐 GitHub: 11PRIA
