@@ -83,39 +83,11 @@ Open in browser:
 http://localhost/xkcd-mailer/xkcd-11PRIA/src/index.php
 Register, verify code, and test the flow
 
-🕒 CRON Setup (Windows Task Scheduler)
-Task Scheduler → Create New Task:
-
-Trigger: Daily at 09:00 AM (or desired time)
-
-Action:
-
-Program/script: C:\xampp\php\php.exe
-
-Arguments: C:\xampp\htdocs\xkcd-mailer\xkcd-11PRIA\src\cron.php
-
-Check inbox to verify delivery ✅
-
-✨ Email Templates
-📧 Verification Email
-Subject: Your Verification Code
-
-<p>Your verification code is: <strong>123456</strong></p>
-📬 Comic Email
-Subject: Your XKCD Comic
-
-<h2>XKCD Comic</h2>
-<img src="comic_image_url" alt="XKCD Comic">
-<p><a href="http://localhost/xkcd-mailer/xkcd-11PRIA/src/unsubscribe.php">Unsubscribe</a></p>
-🔓 Unsubscribe Confirmation Email
-Subject: Confirm Un-subscription
-
-<p>To confirm un-subscription, use this code: <strong>654321</strong></p>
-
-
 ## 👩‍💻 Author
 Priyanka Kumari
+
 📧 Email: priyanka11062003@gmail.com
+
 🌐 GitHub: 11PRIA
 
 📝 Attribution
