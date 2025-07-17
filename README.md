@@ -1,237 +1,123 @@
-# XKCD
+# XKCD Comic Email Subscription 🎯
 
-This project is a PHP-based email verification system where users register using their email, receive a verification code, and subscribe to get a random XKCD comic every day. A CRON job fetches a random XKCD comic and sends it to all registered users every 24 hours.
+This project is a PHP-based XKCD comic email subscription system where users:
+- Register their email via a verification code ✅
+- Receive a **new random XKCD comic every 24 hours** via email 💌
+- Can unsubscribe securely with confirmation 🔓
+
+---
+## Screenshots
+<img width="1895" height="903" alt="image" src="https://github.com/user-attachments/assets/c312e4ff-771e-43b6-ad5f-591e2c738efa" />
+
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/3b05562b-0b2a-41e9-a6c8-694c0c818cc6" />
+
+
+<img width="1897" height="894" alt="image" src="https://github.com/user-attachments/assets/3680dea9-7661-49ab-8114-4f8ee2a80036" />
+
+
+## 🚀 Features Implemented
+
+### 1️⃣ Email Verification Flow
+- User enters email in a form (`index.php`)
+- 6-digit code is generated and sent via email ✉️
+- User enters the code to complete registration ✅
+- Verified email stored in `src/registered_emails.txt`
+
+### 2️⃣ XKCD Comic Delivery via CRON
+- `cron.php` fetches a random XKCD comic from `https://xkcd.com/[comic_id]/info.0.json`
+- Formats content as **HTML**
+- Sends comic to all verified users every 24 hours
+- Setup done using **Windows Task Scheduler**
+
+### 3️⃣ Unsubscribe System
+- Each comic email contains an **unsubscribe link**
+- Clicking leads to `unsubscribe.php`
+- User enters their email and receives a 6-digit code
+- Code confirmation removes them from the email list
 
 ---
 
-## 🚀 Your Task
+## 📁 Folder Structure
 
-Your objective is to implement the functionality in the **src/** directory while following these rules:
+src/
+├── index.php # Email registration & verification form
+├── unsubscribe.php # Handles unsubscription flow
+├── functions.php # Core logic (email, OTP, fetch comic, etc.)
+├── cron.php # Fetch & send XKCD comic daily
+├── setup_cron.sh # (For Linux cron setup)
+├── registered_emails.txt # Stores verified user emails
 
-✅ **DO NOT** change function names or modify the file structure.
-
-✅ **DO NOT** modify anything outside the **src/** folder. You can add additional files if required inside **src** folder.
-
-✅ **DO NOT** hardcode emails; use `registered_emails.txt` as the database.
-
-✅ Implement all required functions in `functions.php`.
-
-✅ Implement a form in `index.php` to take email input and verify via code.
-
-✅ Implement a CRON job to send XKCD comics to registered users every 24 hours.
-
-✅ Implement an unsubscribe feature where users can opt out via email verification.
-
-✅ Implement `unsubscribe.php` to handle email unsubscription.
 
 ---
 
-## 📝 Submission Steps [ Non adherence to this will cause disqualification ]
-1. **Clone** the repository to your local machine.  
-2. **Create a new branch** from the `main` branch. **Do not** push code directly to `main`.  
-3. **Implement** the required features inside the `src/` directory.  
-4. **Push** your code to your **branch** (not `main`).  
-5. **Raise a Pull Request (PR) only once** against the `main` branch when all your code is finalized.  
-   - **Do not raise multiple PRs.**  
-   - **Do not add multiple commits to a PR after submission.**  
-6. **Failure to follow these instructions will result in disqualification.**  
-7. **Wait** for your submission to be reviewed. Do not merge the PR.
+## 💻 Technologies Used
+
+- PHP 8.3  
+- HTML/CSS  
+- Gmail SMTP (via XAMPP Sendmail)  
+- Git & GitHub  
+- Windows Task Scheduler for CRON ⏰  
 
 ---
 
-## ⚠️ Important Notes
+## 🔧 Local Setup Instructions
 
-All form elements should always be visible on the page and should not be conditionally rendered. This ensures the assignment can be tested properly at the appropriate steps.
+### 1. Clone Repo & Create Branch
+```bash
+git clone https://github.com/11PRIA/ComicCourier.git
+cd ComicCourier
+git checkout -b priyanka-submission
+2. Set Up Email
+Configure php.ini and sendmail.ini in XAMPP to use Gmail SMTP
 
-Please ensure that if the base repository shows the original template repo, update it so that your repo's main branch is set as the base branch.
+Use an App Password for Gmail
 
-**Recommended PHP version: 8.3**
+Restart Apache in XAMPP
 
----
+3. Test Locally
+Open in browser:
 
-## 📌 Features to Implement
+http://localhost/xkcd-mailer/xkcd-11PRIA/src/index.php
+Register, verify code, and test the flow
 
-### 1️⃣ **Email Verification**
-- Users enter their email in a form.
-- A **6-digit numeric code** is generated and emailed to them.
-- Users enter the code in the form to verify and register.
-- Store the verified email in `registered_emails.txt`.
+🕒 CRON Setup (Windows Task Scheduler)
+Task Scheduler → Create New Task:
 
-### 2️⃣ **Unsubscribe Mechanism**
-- Emails should include an **unsubscribe link**.
-- Clicking it will take user to the unsubscribe page.
-- Users enter their email in a form.
-- A **6-digit numeric code** is generated and emailed to them.
-- Users enter the code to confirm unsubscription.
+Trigger: Daily at 09:00 AM (or desired time)
 
-### 3️⃣ **XKCD Comic Subscription**
-- Every 24 hours, cron job should:
-  - Fetch data from `https://xkcd.com/[randomComicID]/info.0.json`.
-  - Format it as **HTML (not JSON)**.
-  - Send it via email to all registered users.
+Action:
 
----
+Program/script: C:\xampp\php\php.exe
 
-## 📜 File Details & Function Stubs
+Arguments: C:\xampp\htdocs\xkcd-mailer\xkcd-11PRIA\src\cron.php
 
-You **must** implement the following functions inside `functions.php`:
+Check inbox to verify delivery ✅
 
-```php
-function generateVerificationCode() {
-    // Generate and return a 6-digit numeric code
-}
+✨ Email Templates
+📧 Verification Email
+Subject: Your Verification Code
 
-function registerEmail($email) {
-    $file = __DIR__ . '/registered_emails.txt';
-    // Save verified email to registered_emails.txt
-}
-
-function unsubscribeEmail($email) {
-    $file = __DIR__ . '/registered_emails.txt';
-    // Remove email from registered_emails.txt
-}
-
-function sendVerificationEmail($email, $code) {
-    // Send an email containing the verification code
-}
-
-function verifyCode($email, $code) {
-    // Check if the provided code matches the sent one
-}
-
-function fetchAndFormatXKCDData() {
-    // Fetch latest data from XKCD API and format as HTML
-}
-
-function sendXKCDUpdatesToSubscribers() {
-    $file = __DIR__ . '/registered_emails.txt';
-    // Send formatted XKCD data to all registered emails
-}
-```
-## 🔄 CRON Job Implementation
-
-📌 You must implement a **CRON job** that runs `cron.php` every 24 hours.
-
-📌 **Do not just write instructions**—provide an actual **setup_cron.sh** script inside `src/`.
-
-📌 **Your script should automatically configure the CRON job on execution.**
-
----
-
-### 🛠 Required Files
-
-- **`setup_cron.sh`** (Must configure the CRON job)
-- **`cron.php`** (Must handle sending XKCD comics)
-
----
-
-### 🚀 How It Should Work
-
-- The `setup_cron.sh` script should register a **CRON job** that executes `cron.php` every 24 hours.
-- The CRON job **must be automatically added** when the script runs.
-- The `cron.php` file should actually **fetch random XKCD comic** and **send emails** to registered users.
-
----
-
-## 📩 Email Handling
-
-✅ The email content must be in **HTML format** (not JSON).
-
-✅ Use **PHP's `mail()` function** for sending emails.
-
-✅ Each email should include an **unsubscribe link**.
-
-✅ Unsubscribing should trigger a **confirmation code** before removal.
-
-✅ Store emails in `registered_emails.txt` (**Do not use a database**).
-
----
-
-## ❌ Disqualification Criteria
-
-🚫 **Hardcoding** verification codes.
-
-🚫 **Using a database** (use `registered_emails.txt`).
-
-🚫 **Modifying anything outside** the `src/` directory.
-
-🚫 **Changing function names**.
-
-🚫 **Not implementing a working CRON job**.
-
-🚫 **Not formatting emails as HTML**.
-
----
-## 📌 Input & Button Formatting Guidelines
-
-### 📧 Email Input & Submission Button:
-- The email input field must have `name="email"`.
-- The submit button must have `id="submit-email"`.
-
-#### ✅ Example:
-```html
-<input type="email" name="email" required>
-<button id="submit-email">Submit</button>
-```
----
-### 🔢 Verification Code Input & Submission Button:
-
-- The verification input field must have `name="verification_code"`.
-- The submit button must have `id="submit-verification"`.
-
-#### ✅ Example:
-```html
-<input type="text" name="verification_code" maxlength="6" required>
-<button id="submit-verification">Verify</button>
-```
----
-### 🚫 Unsubscribe Email & Submission Button
-- The unsubscribe input field must have `name="unsubscribe_email"`.
-- The submit button must have `id="submit-unsubscribe"`.
-#### ✅ Example:
-```html
-<input type="email" name="unsubscribe_email" required>
-<button id="submit-unsubscribe">Unsubscribe</button>
-```
----
-### 🚫 Unsubscribe Code Input & Submission Button
-- The unsubscribe code input field must have `name="verification_code"`.
-- The submit button must have `id="submit-verification"`.
-#### ✅ Example:
-```html
-<input type="text" name="verification_code" maxlength="6" required>
-<button id="submit-verification">Verify</button>
-```
----
-
-## 📩 Email Content Guidelines
-
-#### ✅ Verification Email:
-- **Subject:** `Your Verification Code`
-- **Body Format:**
-```html
 <p>Your verification code is: <strong>123456</strong></p>
-```
-- Sender: no-reply@example.com
----
+📬 Comic Email
+Subject: Your XKCD Comic
 
-### 📩 Email Content Guidelines
-
-⚠️ Note: The Subject and Body of the email must strictly follow the formats below, including the exact HTML structure.
-
-#### ✅ XKCD Comic Email:
-- **Subject:** `Your XKCD Comic`
-- **Body Format:**
-```html
+html
+Copy
+Edit
 <h2>XKCD Comic</h2>
-<img src="image_url_here" alt="XKCD Comic">
-<p><a href="#" id="unsubscribe-button">Unsubscribe</a></p>
-```
----
-### ✅ Unsubscribe Confirmation Email:
-- **Subject:** `Confirm Un-subscription`
-- **Body Format:**
-```html
+<img src="comic_image_url" alt="XKCD Comic">
+<p><a href="http://localhost/xkcd-mailer/xkcd-11PRIA/src/unsubscribe.php">Unsubscribe</a></p>
+🔓 Unsubscribe Confirmation Email
+Subject: Confirm Un-subscription
+
 <p>To confirm un-subscription, use this code: <strong>654321</strong></p>
-```
----
+
+
+👩‍💻 Author
+Priyanka Kumari
+📧 Email: priyanka11062003@gmail.com
+🌐 GitHub: 11PRIA
+
+📝 Attribution
+Originally inspired by rtlearn XKCD Mailer, extended and maintained by Priyanka Kumari.
