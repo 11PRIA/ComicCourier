@@ -10,7 +10,8 @@ This project is a PHP-based XKCD comic email subscription system where users:
 <img width="1895" height="903" alt="image" src="https://github.com/user-attachments/assets/c312e4ff-771e-43b6-ad5f-591e2c738efa" />
 
 
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/3b05562b-0b2a-41e9-a6c8-694c0c818cc6" />
+<img width="1884" height="887" alt="image" src="https://github.com/user-attachments/assets/5c322b7f-06b2-44e5-aecb-795e5e123646" />
+
 
 
 <img width="1897" height="894" alt="image" src="https://github.com/user-attachments/assets/3680dea9-7661-49ab-8114-4f8ee2a80036" />
